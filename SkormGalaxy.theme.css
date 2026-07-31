@@ -1,0 +1,16 @@
+/**
+ * @name SKORM Galaxy
+ * @author Bleaven
+ * @description Violet deep-space SKORM theme with its matching animated server logo.
+ * @version 1.5.0
+ * @source https://github.com/Bl3aven/tropical-skorm-theme
+ * @website https://github.com/Bl3aven/tropical-skorm-theme
+ */
+
+@import url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/SkormCore.css");
+@import url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/assets/palettes/galaxy.css");
+
+:root {
+    --skorm-image: url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/assets/backgrounds/galaxy.png");
+    --skorm-server-icon: url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/assets/logos/galaxy.webp");
+}

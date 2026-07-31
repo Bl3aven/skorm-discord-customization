@@ -1,0 +1,16 @@
+/**
+ * @name SKORM Cyberpunk
+ * @author Bleaven
+ * @description Neon magenta and cyan SKORM theme with its matching animated server logo.
+ * @version 1.5.0
+ * @source https://github.com/Bl3aven/tropical-skorm-theme
+ * @website https://github.com/Bl3aven/tropical-skorm-theme
+ */
+
+@import url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/SkormCore.css");
+@import url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/assets/palettes/cyberpunk.css");
+
+:root {
+    --skorm-image: url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/assets/backgrounds/cyberpunk.png");
+    --skorm-server-icon: url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/assets/logos/cyberpunk.webp");
+}

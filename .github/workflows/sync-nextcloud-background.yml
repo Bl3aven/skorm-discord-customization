@@ -42,30 +42,40 @@ jobs:
               assets/logos/design-map.json |
               head -n 1
           )"
+          palette_path="$(
+            jq -r --arg hash "$source_hash" \
+              '.designs[] | select(.sha256 == $hash) | .palette' \
+              assets/logos/design-map.json |
+              head -n 1
+          )"
 
-          if test -n "$logo_path"; then
+          if test -n "$logo_path" && test -n "$palette_path"; then
             echo "Matched $source_hash to $logo_path."
             cp "$logo_path" assets/server-icon-main.webp.new
+            cp "$palette_path" assets/active-palette.css.new
           else
             echo "No known design matches $source_hash; using Nextcloud logos/main.webp."
             test -n "$NEXTCLOUD_LOGO_MAIN_URL"
             curl --fail --location --retry 3 \
               --output assets/server-icon-main.webp.new \
               "$NEXTCLOUD_LOGO_MAIN_URL"
+            cp assets/palettes/tropical.css assets/active-palette.css.new
           fi
 
           file assets/server-icon-main.webp.new | grep -q "Web/P image"
           test "$(wc -c < assets/server-icon-main.webp.new)" -gt 10000
+          grep -q -- "--skorm-accent-rgb" assets/active-palette.css.new
           mv assets/server-icon-main.webp.new assets/server-icon-main.webp
+          mv assets/active-palette.css.new assets/active-palette.css
 
       - name: Commit updated visual assets
         run: |
-          if git diff --quiet -- assets/main.png assets/server-icon-main.webp; then
-            echo "Background and animated logo are already current."
+          if git diff --quiet -- assets/main.png assets/server-icon-main.webp assets/active-palette.css; then
+            echo "Background, animated logo and palette are already current."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/main.png assets/server-icon-main.webp
+          git add assets/main.png assets/server-icon-main.webp assets/active-palette.css
           git commit -m "chore(theme): sync active design"
           git push

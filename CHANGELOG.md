@@ -2,6 +2,14 @@
 
 All notable changes to TropicalSkorm are documented in this file.
 
+## 1.5.0 — 2026-07-31
+
+- Publish Cyberpunk, Galaxy, Greek, Hell and Tropical as five independent
+  BetterDiscord theme files.
+- Add fixed public backgrounds and matching animated logos for every theme.
+- Extract the shared Discord layout into `SkormCore.css`.
+- Synchronize the dynamic theme's accent palette with the recognized design.
+
 ## 1.4.0 — 2026-07-31
 
 - Add five animated SKORM logos matching the Cyberpunk, Galaxy, Greek, Hell
