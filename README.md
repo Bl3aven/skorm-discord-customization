@@ -16,7 +16,8 @@ visual identity.
 
 ## Installation
 
-1. Download [`TropicalSkorm.theme.css`](TropicalSkorm.theme.css).
+1. Download the latest
+   [`TropicalSkorm.theme.css`](https://github.com/Bl3aven/tropical-skorm-theme/releases/latest/download/TropicalSkorm.theme.css).
 2. Open Discord and go to **Settings → BetterDiscord → Themes**.
 3. Select **Open Themes Folder**.
 4. Copy `TropicalSkorm.theme.css` into that folder.
