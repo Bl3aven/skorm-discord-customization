@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "designs": [
+    {
+      "source": "2048.png",
+      "slug": "cyberpunk",
+      "sha256": "b99bf80bc0b24281387f84c5e09d3d4a22d42f7457de8ddca805e74a8cd7080e",
+      "logo": "assets/logos/cyberpunk.webp"
+    },
+    {
+      "source": "Galaxy.png",
+      "slug": "galaxy",
+      "sha256": "1ab4f208f5a49f7baf749fcf858a880fd06651266cc79359bdba7376fdbbad9e",
+      "logo": "assets/logos/galaxy.webp"
+    },
+    {
+      "source": "Grec.png",
+      "slug": "greek",
+      "sha256": "fe014a5e0466916f4eee711dc1f40997a0a73de92150e1c66495493d14f32b85",
+      "logo": "assets/logos/greek.webp"
+    },
+    {
+      "source": "Hell.png",
+      "slug": "hell",
+      "sha256": "166d3b690f7a321925fafa506b1f7eb3deb7493b4ae5002a60080b9b9b60b297",
+      "logo": "assets/logos/hell.webp"
+    },
+    {
+      "source": "main.png (tropical original)",
+      "slug": "tropical",
+      "sha256": "9b9c09fc47142dcfea7ff293f8250054662cb8eac6cbdb75f90b7d4adcf99a9a",
+      "logo": "assets/logos/tropical.webp"
+    }
+  ]
+}

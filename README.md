@@ -14,6 +14,7 @@ visual identity.
 - Remotely updated `main.png` background
 - Optional per-server icon customization snippet
 - Animated modern icon for the `SKORM - Agency` server rail entry
+- Automatic animated-logo matching for the five bundled visual designs
 
 ## Installation
 
@@ -41,9 +42,19 @@ assets/main.png
 Replacing that file while keeping the same name updates the background for
 everyone after GitHub's cache refresh and a Discord reload (`Ctrl+R`).
 
-The repository synchronizes `main.png` from Nextcloud approximately every
-30 minutes. The private source URL is stored in the `NEXTCLOUD_MAIN_URL`
-repository secret and is never committed.
+The repository synchronizes `main.png` and its matching animated logo from
+Nextcloud approximately every 30 minutes. The private source URLs are stored in
+repository secrets and are never committed.
+
+For the five known designs, the workflow compares the SHA-256 of `main.png`
+with [`assets/logos/design-map.json`](assets/logos/design-map.json) and selects
+the corresponding WebP automatically. For an unknown or modified design, place
+its animated logo at `logos/main.webp` in Nextcloud; this becomes the manual
+fallback. Discord always loads the stable public path:
+
+```text
+assets/server-icon-main.webp
+```
 
 ## Customizing one server icon
 
@@ -57,8 +68,8 @@ This only changes the icon in your own Discord client. It does not modify the
 server's real icon for other members.
 
 The bundled `SKORM - Agency` customization uses
-[`assets/skorm-modern-loop-512.webp`](assets/skorm-modern-loop-512.webp) and
-targets that server's exact Discord guild ID.
+[`assets/server-icon-main.webp`](assets/server-icon-main.webp) and targets that
+server's exact Discord guild ID.
 
 ## Compatibility
 

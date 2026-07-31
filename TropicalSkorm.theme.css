@@ -2,7 +2,7 @@
  * @name TropicalSkorm
  * @author Bleaven
  * @description A dark, translucent tropical SKORM theme with a remotely updated background.
- * @version 1.3.0
+ * @version 1.4.0
  * @source https://github.com/Bl3aven/tropical-skorm-theme
  * @website https://github.com/Bl3aven/tropical-skorm-theme
  */
@@ -119,7 +119,7 @@ body {
  * The guild ID keeps the rule limited to this exact server rail entry.
  */
 [data-list-item-id="guildsnav___1523407172514349097"] img {
-    content: url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/assets/skorm-modern-loop-512.webp") !important;
+    content: url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/assets/server-icon-main.webp") !important;
     object-fit: cover !important;
 }
 
@@ -127,7 +127,7 @@ body {
 [data-list-item-id="guildsnav___1523407172514349097"] [class*=" childWrapper_"] {
     color: transparent !important;
     background:
-        url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/assets/skorm-modern-loop-512.webp")
+        url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/assets/server-icon-main.webp")
         center / cover
         no-repeat !important;
 }

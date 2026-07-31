@@ -1,4 +1,4 @@
-name: Sync background
+name: Sync background and logo
 
 on:
   workflow_dispatch:
@@ -31,14 +31,41 @@ jobs:
           test "$(wc -c < assets/main.png.new)" -gt 10000
           mv assets/main.png.new assets/main.png
 
-      - name: Commit an updated background
+      - name: Select the matching animated logo
+        env:
+          NEXTCLOUD_LOGO_MAIN_URL: ${{ secrets.NEXTCLOUD_LOGO_MAIN_URL }}
         run: |
-          if git diff --quiet -- assets/main.png; then
-            echo "Background is already current."
+          source_hash="$(sha256sum assets/main.png | cut -d ' ' -f 1)"
+          logo_path="$(
+            jq -r --arg hash "$source_hash" \
+              '.designs[] | select(.sha256 == $hash) | .logo' \
+              assets/logos/design-map.json |
+              head -n 1
+          )"
+
+          if test -n "$logo_path"; then
+            echo "Matched $source_hash to $logo_path."
+            cp "$logo_path" assets/server-icon-main.webp.new
+          else
+            echo "No known design matches $source_hash; using Nextcloud logos/main.webp."
+            test -n "$NEXTCLOUD_LOGO_MAIN_URL"
+            curl --fail --location --retry 3 \
+              --output assets/server-icon-main.webp.new \
+              "$NEXTCLOUD_LOGO_MAIN_URL"
+          fi
+
+          file assets/server-icon-main.webp.new | grep -q "Web/P image"
+          test "$(wc -c < assets/server-icon-main.webp.new)" -gt 10000
+          mv assets/server-icon-main.webp.new assets/server-icon-main.webp
+
+      - name: Commit updated visual assets
+        run: |
+          if git diff --quiet -- assets/main.png assets/server-icon-main.webp; then
+            echo "Background and animated logo are already current."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/main.png
-          git commit -m "chore(background): sync main image"
+          git add assets/main.png assets/server-icon-main.webp
+          git commit -m "chore(theme): sync active design"
           git push
