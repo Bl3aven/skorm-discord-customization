@@ -13,6 +13,7 @@ visual identity.
 - Lightweight standalone CSS with no plugin dependency
 - Remotely updated `main.png` background
 - Optional per-server icon customization snippet
+- Animated modern icon for the `SKORM - Agency` server rail entry
 
 ## Installation
 
@@ -54,6 +55,11 @@ into BetterDiscord's **Custom CSS** editor, then replace:
 
 This only changes the icon in your own Discord client. It does not modify the
 server's real icon for other members.
+
+The bundled `SKORM - Agency` customization uses
+[`assets/skorm-modern-loop-512.webp`](assets/skorm-modern-loop-512.webp) and
+targets the server's accessible label. It therefore works without enabling
+Discord Developer Mode.
 
 ## Compatibility
 
