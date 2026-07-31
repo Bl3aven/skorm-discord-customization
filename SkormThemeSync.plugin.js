@@ -18,6 +18,7 @@ const ACTIVE_STATE_URL = `${LIVE_BASE}/active.json`;
 const BACKGROUND_URL = `${LIVE_BASE}/background.png`;
 const LOGO_URL = `${LIVE_BASE}/logo.webp`;
 const PALETTE_URL = `${LIVE_BASE}/palette.css`;
+const STYLE_ID = "skorm-theme-sync-live-values";
 const RGB_PROPERTIES = [
     "--skorm-base-rgb",
     "--skorm-secondary-rgb",
@@ -57,13 +58,7 @@ module.exports = class SkormThemeSync {
         if (this.themeCheckTimer) clearTimeout(this.themeCheckTimer);
         this.timer = null;
         this.themeCheckTimer = null;
-        for (const property of [
-            "--skorm-image",
-            "--skorm-server-icon",
-            ...RGB_PROPERTIES
-        ]) {
-            document.documentElement.style.removeProperty(property);
-        }
+        document.getElementById(STYLE_ID)?.remove();
     }
 
     enableDynamicTheme() {
@@ -111,6 +106,24 @@ module.exports = class SkormThemeSync {
         return palette;
     }
 
+    applyThemeStyle(cacheKey, palette) {
+        let style = document.getElementById(STYLE_ID);
+        if (!style) {
+            style = document.createElement("style");
+            style.id = STYLE_ID;
+            style.dataset.skormThemeSync = "live";
+            document.head.append(style);
+        }
+        const declarations = [
+            `--skorm-image: url("${BACKGROUND_URL}?v=${cacheKey}") !important`,
+            `--skorm-server-icon: url("${LOGO_URL}?v=${cacheKey}") !important`,
+            ...RGB_PROPERTIES.map(
+                (property) => `${property}: ${palette[property]} !important`
+            )
+        ];
+        style.textContent = `:root {\n    ${declarations.join(";\n    ")};\n}`;
+    }
+
     async sync(initial) {
         if (this.syncing) return;
         this.syncing = true;
@@ -127,18 +140,7 @@ module.exports = class SkormThemeSync {
 
             const palette = this.parsePalette(await this.fetchText(PALETTE_URL));
             const cacheKey = encodeURIComponent(version);
-            const rootStyle = document.documentElement.style;
-            rootStyle.setProperty(
-                "--skorm-image",
-                `url("${BACKGROUND_URL}?v=${cacheKey}")`
-            );
-            rootStyle.setProperty(
-                "--skorm-server-icon",
-                `url("${LOGO_URL}?v=${cacheKey}")`
-            );
-            for (const [property, value] of Object.entries(palette)) {
-                rootStyle.setProperty(property, value);
-            }
+            this.applyThemeStyle(cacheKey, palette);
 
             const changed = this.lastVersion && this.lastVersion !== version;
             this.lastVersion = version;
