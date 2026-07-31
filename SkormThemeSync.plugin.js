@@ -28,20 +28,35 @@ module.exports = class SkormThemeSync {
     constructor() {
         this.api = new BdApi(PLUGIN_NAME);
         this.timer = null;
+        this.themeCheckTimer = null;
         this.syncing = false;
         this.lastVersion = "";
         this.lastErrorAt = 0;
     }
 
     start() {
-        this.ensureDynamicThemeEnabled();
+        if (!this.enableDynamicTheme()) {
+            // BetterDiscord can start plugins before it has finished indexing
+            // themes. Retry once after startup before showing a warning.
+            this.themeCheckTimer = setTimeout(() => {
+                this.themeCheckTimer = null;
+                if (!this.enableDynamicTheme()) {
+                    this.api.UI.showToast(
+                        "Installe aussi SkormDynamic.theme.css pour afficher le thème SKORM.",
+                        {type: "warning", timeout: 8000}
+                    );
+                }
+            }, 2000);
+        }
         void this.sync(true);
         this.timer = setInterval(() => void this.sync(false), POLL_INTERVAL_MS);
     }
 
     stop() {
         if (this.timer) clearInterval(this.timer);
+        if (this.themeCheckTimer) clearTimeout(this.themeCheckTimer);
         this.timer = null;
+        this.themeCheckTimer = null;
         for (const property of [
             "--skorm-image",
             "--skorm-server-icon",
@@ -51,16 +66,13 @@ module.exports = class SkormThemeSync {
         }
     }
 
-    ensureDynamicThemeEnabled() {
+    enableDynamicTheme() {
         for (const themeName of ["SkormDynamic", "TropicalSkorm"]) {
             if (!BdApi.Themes.get(themeName)) continue;
             BdApi.Themes.enable(themeName);
-            return;
+            return true;
         }
-        this.api.UI.showToast(
-            "Installe aussi SkormDynamic.theme.css pour afficher le thème SKORM.",
-            {type: "warning", timeout: 8000}
-        );
+        return false;
     }
 
     async fetchText(url) {
