@@ -39,9 +39,9 @@ assets/main.png
 Replacing that file while keeping the same name updates the background for
 everyone after GitHub's cache refresh and a Discord reload (`Ctrl+R`).
 
-The repository includes an optional GitHub Actions workflow that can synchronize
-`main.png` from a private source URL stored in the
-`NEXTCLOUD_MAIN_URL` repository secret. The source URL is never committed.
+The repository synchronizes `main.png` from Nextcloud approximately every
+30 minutes. The private source URL is stored in the `NEXTCLOUD_MAIN_URL`
+repository secret and is never committed.
 
 ## Customizing one server icon
 
