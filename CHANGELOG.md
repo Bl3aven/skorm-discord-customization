@@ -2,6 +2,13 @@
 
 All notable changes to TropicalSkorm are documented in this file.
 
+## 1.6.0 — 2026-07-31
+
+- Support the dynamic Nextcloud catalogue managed by SKORMBOT.
+- Synchronize unknown themes with both `logos/main.webp` and
+  `palettes/main.css`.
+- Reduce the scheduled synchronization interval from 30 to 5 minutes.
+
 ## 1.5.0 — 2026-07-31
 
 - Publish Cyberpunk, Galaxy, Greek, Hell and Tropical as five independent

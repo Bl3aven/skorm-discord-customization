@@ -3,7 +3,7 @@ name: Sync background and logo
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17,47 * * * *"
+    - cron: "*/5 * * * *"
 
 permissions:
   contents: write
@@ -34,6 +34,7 @@ jobs:
       - name: Select the matching animated logo
         env:
           NEXTCLOUD_LOGO_MAIN_URL: ${{ secrets.NEXTCLOUD_LOGO_MAIN_URL }}
+          NEXTCLOUD_PALETTE_MAIN_URL: ${{ secrets.NEXTCLOUD_PALETTE_MAIN_URL }}
         run: |
           source_hash="$(sha256sum assets/main.png | cut -d ' ' -f 1)"
           logo_path="$(
@@ -54,12 +55,15 @@ jobs:
             cp "$logo_path" assets/server-icon-main.webp.new
             cp "$palette_path" assets/active-palette.css.new
           else
-            echo "No known design matches $source_hash; using Nextcloud logos/main.webp."
+            echo "No known design matches $source_hash; using the Nextcloud active logo and palette."
             test -n "$NEXTCLOUD_LOGO_MAIN_URL"
+            test -n "$NEXTCLOUD_PALETTE_MAIN_URL"
             curl --fail --location --retry 3 \
               --output assets/server-icon-main.webp.new \
               "$NEXTCLOUD_LOGO_MAIN_URL"
-            cp assets/palettes/tropical.css assets/active-palette.css.new
+            curl --fail --location --retry 3 \
+              --output assets/active-palette.css.new \
+              "$NEXTCLOUD_PALETTE_MAIN_URL"
           fi
 
           file assets/server-icon-main.webp.new | grep -q "Web/P image"
