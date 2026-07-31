@@ -42,14 +42,15 @@ assets/active-palette.css
 ```
 
 The repository synchronizes these files from Nextcloud approximately every
-30 minutes. For the five known designs, the workflow compares the SHA-256 of
+5 minutes. For the five known designs, the workflow compares the SHA-256 of
 `main.png` with
 [`assets/logos/design-map.json`](assets/logos/design-map.json), then selects
 the matching animated logo and color palette automatically.
 
 For an unknown or modified design, place its animated logo at
-`logos/main.webp` in Nextcloud. The dynamic theme uses that logo with the
-tropical fallback palette until a dedicated palette is added to the map.
+`logos/main.webp` and its palette at `palettes/main.css` in Nextcloud.
+SKORMBOT updates these active files through `/theme appliquer`, so future
+catalogue entries do not require a bot code change.
 
 ## Server icon scope
 
