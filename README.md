@@ -1,16 +1,16 @@
 # SKORM Discord Customization
 
-Auditable BetterDiscord themes, animated SKORM server icons and a live
+Auditable BetterDiscord themes, animated backgrounds and SKORM server icons with a live
 Nextcloud synchronizer. The live edition applies a global theme change to
 every connected client within a few seconds.
 
 | Theme | Visual identity | Download |
 |---|---|---|
-| Cyberpunk | Neon magenta and cyan | [`SkormCyberpunk.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormCyberpunk.theme.css) |
-| Galaxy | Violet deep space | [`SkormGalaxy.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormGalaxy.theme.css) |
-| Greek | Marble and Olympian gold | [`SkormGreek.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormGreek.theme.css) |
-| Hell | Obsidian, lava and embers | [`SkormHell.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormHell.theme.css) |
-| Tropical | Dark emerald jungle | [`SkormTropical.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormTropical.theme.css) |
+| Cyberpunk | Neon pulse, rain and scanline glitches | [`SkormCyberpunk.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormCyberpunk.theme.css) |
+| Galaxy | Star warp and violet cosmic glow | [`SkormGalaxy.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormGalaxy.theme.css) |
+| Greek | Moving sun rays, mist and golden particles | [`SkormGreek.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormGreek.theme.css) |
+| Hell | Rising embers, heat glow and red smoke | [`SkormHell.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormHell.theme.css) |
+| Tropical | Drifting mist, fireflies and green halo | [`SkormTropical.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormTropical.theme.css) |
 | Live | Active global Nextcloud design | [`SkormDynamic.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormDynamic.theme.css) |
 
 ![Active SKORM background](assets/main.png)
@@ -43,6 +43,7 @@ publishes a read-only atomic snapshot at
 
 - polls the small public `theme-live/active.json` state every three seconds;
 - downloads the palette only when the state version changes;
+- selects the animated WebP or static PNG declared by SKORMBOT;
 - updates CSS variables without reloading Discord;
 - adds that version to the background and logo URLs, bypassing browser and
   reverse-proxy caches.
@@ -63,11 +64,16 @@ The five named themes do not require the synchronizer. Each `.theme.css` is
 standalone: the shared layout and palette are embedded at build time to avoid
 Chromium rejecting GitHub raw CSS served as `text/plain; nosniff`.
 
+Their backgrounds are seamless 1280×720 animated WebP loops: 96 frames,
+24 FPS and four seconds. The original PNG posters remain available as
+low-resource fallbacks.
+
 To rebuild and verify all generated files:
 
 ```bash
 python scripts/build_themes.py
 python scripts/build_themes.py --check
+python scripts/build_animated_backgrounds.py
 node --check SkormThemeSync.plugin.js
 ```
 

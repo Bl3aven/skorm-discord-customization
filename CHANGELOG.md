@@ -3,6 +3,15 @@
 All notable changes to SKORM Discord Customization are documented in this
 file.
 
+## 2.1.0 — 2026-07-31
+
+- Add five seamless 1280×720 animated WebP backgrounds at 24 FPS.
+- Add dedicated effects for Cyberpunk, Galaxy, Greek, Hell and Tropical.
+- Add the reproducible `scripts/build_animated_backgrounds.py` renderer.
+- Let the live state select either `background.webp` or the static
+  `background.png` fallback.
+- Point fixed BetterDiscord themes to their matching animated backgrounds.
+
 ## 2.0.0 — 2026-07-31
 
 - Rename the public project to `skorm-discord-customization`.

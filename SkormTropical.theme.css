@@ -2,7 +2,7 @@
  * @name SkormTropical
  * @author Bleaven
  * @description Dark emerald jungle SKORM theme.
- * @version 2.0.0
+ * @version 2.1.0
  * @source https://github.com/Bl3aven/skorm-discord-customization/blob/main/SkormTropical.theme.css
  * @website https://github.com/Bl3aven/skorm-discord-customization
  */
@@ -15,7 +15,7 @@
 }
 
 :root {
-    --skorm-image: url("https://raw.githubusercontent.com/Bl3aven/skorm-discord-customization/main/assets/backgrounds/tropical.png");
+    --skorm-image: url("https://raw.githubusercontent.com/Bl3aven/skorm-discord-customization/main/assets/backgrounds-animated/tropical.webp");
     --skorm-server-icon: url("https://raw.githubusercontent.com/Bl3aven/skorm-discord-customization/main/assets/logos/tropical.webp");
 }
 
