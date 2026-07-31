@@ -2,7 +2,7 @@
 
 Auditable BetterDiscord themes, animated SKORM server icons and a live
 Nextcloud synchronizer. The live edition applies a global theme change to
-every connected client in about three seconds.
+every connected client within a few seconds.
 
 | Theme | Visual identity | Download |
 |---|---|---|
@@ -41,11 +41,11 @@ installations. It contains the same standalone CSS as `SkormDynamic`.
 publishes a read-only atomic snapshot at
 `https://skormdemo.tournayre.ovh/theme-live/`. The synchronizer:
 
-- polls the 129-byte public `themes/active.json` state every three seconds;
+- polls the small public `theme-live/active.json` state every three seconds;
 - downloads the palette only when the state version changes;
 - updates CSS variables without reloading Discord;
-- adds that version to the background and logo URLs, bypassing the four-hour
-  Nextcloud image cache.
+- adds that version to the background and logo URLs, bypassing browser and
+  reverse-proxy caches.
 
 The GitHub Actions workflow still mirrors the active assets into this
 repository as a backup, but live clients do not wait for GitHub Actions or the
