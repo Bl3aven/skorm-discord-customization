@@ -1,29 +1,26 @@
-# TropicalSkorm
+# SKORM BetterDiscord Theme Collection
 
-A dark and translucent BetterDiscord theme built around the tropical SKORM
-visual identity.
+Five dark, translucent BetterDiscord themes with matching animated SKORM
+server icons, plus one dynamic theme synchronized from Nextcloud.
 
-![TropicalSkorm background](assets/main.png)
+| Theme | Visual identity | Download |
+|---|---|---|
+| Cyberpunk | Neon magenta and cyan | [`SkormCyberpunk.theme.css`](https://github.com/Bl3aven/tropical-skorm-theme/releases/latest/download/SkormCyberpunk.theme.css) |
+| Galaxy | Violet deep space | [`SkormGalaxy.theme.css`](https://github.com/Bl3aven/tropical-skorm-theme/releases/latest/download/SkormGalaxy.theme.css) |
+| Greek | Marble and Olympian gold | [`SkormGreek.theme.css`](https://github.com/Bl3aven/tropical-skorm-theme/releases/latest/download/SkormGreek.theme.css) |
+| Hell | Obsidian, lava and embers | [`SkormHell.theme.css`](https://github.com/Bl3aven/tropical-skorm-theme/releases/latest/download/SkormHell.theme.css) |
+| Tropical | Dark emerald jungle | [`SkormTropical.theme.css`](https://github.com/Bl3aven/tropical-skorm-theme/releases/latest/download/SkormTropical.theme.css) |
+| Dynamic | Active Nextcloud design | [`TropicalSkorm.theme.css`](https://github.com/Bl3aven/tropical-skorm-theme/releases/latest/download/TropicalSkorm.theme.css) |
 
-## Features
-
-- Full-window tropical background
-- Readable translucent chat, member and navigation panels
-- Green accent colors matching the SKORM artwork
-- Lightweight standalone CSS with no plugin dependency
-- Remotely updated `main.png` background
-- Optional per-server icon customization snippet
-- Animated modern icon for the `SKORM - Agency` server rail entry
-- Automatic animated-logo matching for the five bundled visual designs
+![Active SKORM background](assets/main.png)
 
 ## Installation
 
-1. Download the latest
-   [`TropicalSkorm.theme.css`](https://github.com/Bl3aven/tropical-skorm-theme/releases/latest/download/TropicalSkorm.theme.css).
+1. Download one `.theme.css` file from the table.
 2. Open Discord and go to **Settings → BetterDiscord → Themes**.
 3. Select **Open Themes Folder**.
-4. Copy `TropicalSkorm.theme.css` into that folder.
-5. Enable **TropicalSkorm**.
+4. Copy the downloaded file into that folder.
+5. Enable only the SKORM theme you want to use.
 
 The BetterDiscord theme folder on Windows is:
 
@@ -31,45 +28,37 @@ The BetterDiscord theme folder on Windows is:
 %appdata%\BetterDiscord\themes
 ```
 
-## Updating the background
+The five named themes are fixed: selecting `SKORM Hell`, for example, always
+loads the Hell background, red palette and matching animated logo.
 
-The public theme always loads:
+## Dynamic theme
+
+`TropicalSkorm.theme.css` is the dynamic edition. It always loads:
 
 ```text
 assets/main.png
-```
-
-Replacing that file while keeping the same name updates the background for
-everyone after GitHub's cache refresh and a Discord reload (`Ctrl+R`).
-
-The repository synchronizes `main.png` and its matching animated logo from
-Nextcloud approximately every 30 minutes. The private source URLs are stored in
-repository secrets and are never committed.
-
-For the five known designs, the workflow compares the SHA-256 of `main.png`
-with [`assets/logos/design-map.json`](assets/logos/design-map.json) and selects
-the corresponding WebP automatically. For an unknown or modified design, place
-its animated logo at `logos/main.webp` in Nextcloud; this becomes the manual
-fallback. Discord always loads the stable public path:
-
-```text
 assets/server-icon-main.webp
+assets/active-palette.css
 ```
 
-## Customizing one server icon
+The repository synchronizes these files from Nextcloud approximately every
+30 minutes. For the five known designs, the workflow compares the SHA-256 of
+`main.png` with
+[`assets/logos/design-map.json`](assets/logos/design-map.json), then selects
+the matching animated logo and color palette automatically.
 
-Copy [`snippets/server-icon.template.css`](snippets/server-icon.template.css)
-into BetterDiscord's **Custom CSS** editor, then replace:
+For an unknown or modified design, place its animated logo at
+`logos/main.webp` in Nextcloud. The dynamic theme uses that logo with the
+tropical fallback palette until a dedicated palette is added to the map.
 
-- `YOUR_SERVER_ID` with the Discord server ID
-- `YOUR_ICON_URL` with a direct HTTPS image or animated image URL
+## Server icon scope
 
-This only changes the icon in your own Discord client. It does not modify the
-server's real icon for other members.
+The bundled animated icon targets the `SKORM - Agency` guild ID. It changes
+the server rail icon locally for people using one of these themes; it does not
+replace the official Discord server icon for members without BetterDiscord.
 
-The bundled `SKORM - Agency` customization uses
-[`assets/server-icon-main.webp`](assets/server-icon-main.webp) and targets that
-server's exact Discord guild ID.
+To target another server, use
+[`snippets/server-icon.template.css`](snippets/server-icon.template.css).
 
 ## Compatibility
 
@@ -88,5 +77,5 @@ The SKORM artwork is covered by the terms in
 
 ## Disclaimer
 
-TropicalSkorm is an independent community theme. It is not affiliated with or
-endorsed by Discord or BetterDiscord.
+SKORM themes are independent community themes. They are not affiliated with
+or endorsed by Discord or BetterDiscord.

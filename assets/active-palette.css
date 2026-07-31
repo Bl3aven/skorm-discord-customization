@@ -1,0 +1,9 @@
+/*
+ * Managed by .github/workflows/sync-nextcloud-background.yml.
+ * The initial palette matches the original tropical design.
+ */
+:root {
+    --skorm-base-rgb: 2 8 6;
+    --skorm-secondary-rgb: 5 18 13;
+    --skorm-accent-rgb: 166 255 151;
+}
