@@ -1,0 +1,23 @@
+/**
+ * TropicalSkorm — optional custom server icon
+ *
+ * 1. Enable Discord Developer Mode.
+ * 2. Right-click the server and copy its ID.
+ * 3. Replace YOUR_SERVER_ID and YOUR_ICON_URL below.
+ * 4. Paste this snippet into BetterDiscord Custom CSS.
+ */
+
+[data-list-item-id="guildsnav___YOUR_SERVER_ID"] img {
+    content: url("YOUR_ICON_URL") !important;
+    object-fit: cover !important;
+}
+
+/* Fallback for servers that do not currently have an image icon. */
+[data-list-item-id="guildsnav___YOUR_SERVER_ID"] [class^="childWrapper_"],
+[data-list-item-id="guildsnav___YOUR_SERVER_ID"] [class*=" childWrapper_"] {
+    color: transparent !important;
+    background:
+        url("YOUR_ICON_URL")
+        center / cover
+        no-repeat !important;
+}

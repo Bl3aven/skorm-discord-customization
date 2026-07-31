@@ -1,0 +1,4 @@
+*.theme.css.tmp
+assets/*.new
+.DS_Store
+Thumbs.db

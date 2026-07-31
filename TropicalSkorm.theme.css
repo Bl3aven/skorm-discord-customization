@@ -1,0 +1,115 @@
+/**
+ * @name TropicalSkorm
+ * @author Bleaven
+ * @description A dark, translucent tropical SKORM theme with a remotely updated background.
+ * @version 1.2.0
+ * @source https://github.com/Bl3aven/tropical-skorm-theme
+ * @website https://github.com/Bl3aven/tropical-skorm-theme
+ */
+
+:root {
+    --tropical-skorm-image: url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/assets/main.png");
+    --tropical-skorm-panel: rgb(3 10 8 / 48%);
+    --tropical-skorm-panel-strong: rgb(2 8 6 / 62%);
+    --tropical-skorm-floating: rgb(2 9 7 / 88%);
+    --tropical-skorm-border: rgb(153 255 151 / 15%);
+    --tropical-skorm-accent: rgb(166 255 151);
+}
+
+html,
+body {
+    background-color: #020806 !important;
+    background-image:
+        linear-gradient(rgb(0 8 5 / 5%), rgb(0 5 4 / 18%)),
+        var(--tropical-skorm-image) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+}
+
+#app-mount,
+[class^="app_"],
+[class*=" app_"],
+[class^="bg_"],
+[class*=" bg_"],
+[class^="layers_"],
+[class*=" layers_"],
+[class^="layer_"],
+[class*=" layer_"],
+[class^="base_"],
+[class*=" base_"] {
+    background-color: transparent !important;
+}
+
+.theme-dark,
+.theme-darker,
+.theme-amoled {
+    --background-primary: var(--tropical-skorm-panel);
+    --background-secondary: rgb(3 10 8 / 55%);
+    --background-secondary-alt: rgb(2 8 6 / 66%);
+    --background-tertiary: var(--tropical-skorm-panel-strong);
+    --background-floating: var(--tropical-skorm-floating);
+    --background-nested-floating: rgb(3 12 9 / 86%);
+    --background-mobile-primary: var(--tropical-skorm-panel);
+    --background-mobile-secondary: var(--tropical-skorm-panel-strong);
+    --background-base-lowest: rgb(2 8 6 / 35%);
+    --background-base-lower: rgb(3 10 8 / 42%);
+    --background-base-low: rgb(4 13 10 / 48%);
+    --background-surface-high: rgb(6 18 14 / 55%);
+    --background-surface-higher: rgb(7 22 17 / 62%);
+    --background-surface-highest: rgb(8 25 19 / 70%);
+    --bg-base-primary: rgb(2 8 6 / 32%);
+    --bg-base-secondary: rgb(3 10 8 / 44%);
+    --bg-base-tertiary: rgb(2 8 6 / 58%);
+    --bg-surface-overlay: var(--tropical-skorm-floating);
+    --bg-surface-raised: rgb(4 14 10 / 82%);
+    --home-background: transparent;
+    --chat-background-default: rgb(2 8 6 / 28%);
+    --input-background: rgb(2 9 7 / 70%);
+    --channeltextarea-background: rgb(2 9 7 / 70%);
+    --modal-background: var(--tropical-skorm-floating);
+    --modal-footer-background: rgb(2 8 6 / 92%);
+    --background-modifier-hover: rgb(166 255 151 / 8%);
+    --background-modifier-active: rgb(166 255 151 / 12%);
+    --background-modifier-selected: rgb(166 255 151 / 15%);
+    --background-modifier-accent: var(--tropical-skorm-border);
+    --border-faint: rgb(166 255 151 / 6%);
+    --border-subtle: rgb(166 255 151 / 10%);
+    --border-strong: var(--tropical-skorm-border);
+    --focus-primary: var(--tropical-skorm-accent);
+}
+
+[class^="sidebar_"],
+[class*=" sidebar_"],
+[class^="members_"],
+[class*=" members_"] {
+    background-color: rgb(2 8 6 / 55%) !important;
+    backdrop-filter: blur(2px);
+}
+
+[class^="chat_"],
+[class*=" chat_"],
+[class^="chatContent_"],
+[class*=" chatContent_"] {
+    background-color: rgb(2 8 6 / 22%) !important;
+}
+
+[class^="panels_"],
+[class*=" panels_"],
+[class^="form_"],
+[class*=" form_"] {
+    background-color: rgb(2 8 6 / 65%) !important;
+    backdrop-filter: blur(3px);
+}
+
+[class^="title_"],
+[class*=" title_"],
+[class^="themed_"],
+[class*=" themed_"] {
+    --background-primary: rgb(2 8 6 / 60%);
+}
+
+::selection {
+    background: rgb(166 255 151 / 28%);
+}

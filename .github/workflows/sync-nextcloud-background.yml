@@ -1,0 +1,44 @@
+name: Sync background
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17,47 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-background
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Download main.png
+        env:
+          NEXTCLOUD_MAIN_URL: ${{ secrets.NEXTCLOUD_MAIN_URL }}
+        run: |
+          test -n "$NEXTCLOUD_MAIN_URL"
+          curl --fail --location --retry 3 \
+            --output assets/main.png.new \
+            "$NEXTCLOUD_MAIN_URL"
+          file assets/main.png.new | grep -q "PNG image data"
+          test "$(wc -c < assets/main.png.new)" -gt 10000
+          mv assets/main.png.new assets/main.png
+
+      - name: Commit an updated background
+        run: |
+          if git diff --quiet -- assets/main.png; then
+            echo "Background is already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/main.png
+          git commit -m "chore(background): sync main image"
+          git push
