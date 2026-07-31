@@ -12,7 +12,7 @@ REPOSITORY = "Bl3aven/skorm-discord-customization"
 REPOSITORY_URL = f"https://github.com/{REPOSITORY}"
 RAW_BASE = f"https://raw.githubusercontent.com/{REPOSITORY}/main"
 LIVE_BASE = "https://skormdemo.tournayre.ovh/theme-live"
-VERSION = "2.0.0"
+VERSION = "2.1.0"
 
 FIXED_THEMES = {
     "SkormCyberpunk.theme.css": (
@@ -82,7 +82,7 @@ def render_fixed(
         encoding="utf-8"
     ).strip()
     assets = root_assets(
-        f"{RAW_BASE}/assets/backgrounds/{slug}.png",
+        f"{RAW_BASE}/assets/backgrounds-animated/{slug}.webp",
         f"{RAW_BASE}/assets/logos/{slug}.webp",
     )
     return (

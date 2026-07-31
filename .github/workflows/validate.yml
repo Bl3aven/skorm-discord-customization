@@ -19,3 +19,14 @@ jobs:
 
       - name: Validate BetterDiscord plugin syntax
         run: node --check SkormThemeSync.plugin.js
+
+      - name: Validate animated backgrounds
+        run: |
+          for theme in cyberpunk galaxy greek hell tropical; do
+            asset="assets/backgrounds-animated/${theme}.webp"
+            test -f "$asset"
+            test "$(wc -c < "$asset")" -gt 500000
+            test "$(wc -c < "$asset")" -lt 8000000
+            file "$asset" | grep -q "Web/P image"
+            grep -a -q "ANIM" "$asset"
+          done

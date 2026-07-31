@@ -2,7 +2,7 @@
  * @name SkormThemeSync
  * @author Bleaven
  * @description Applies the active SKORM background, animated logo and palette to every connected BetterDiscord client within a few seconds.
- * @version 2.0.0
+ * @version 2.1.0
  * @source https://github.com/Bl3aven/skorm-discord-customization/blob/main/SkormThemeSync.plugin.js
  * @website https://github.com/Bl3aven/skorm-discord-customization
  * @updateUrl https://raw.githubusercontent.com/Bl3aven/skorm-discord-customization/main/SkormThemeSync.plugin.js
@@ -15,7 +15,6 @@ const POLL_INTERVAL_MS = 3000;
 const REQUEST_TIMEOUT_MS = 10000;
 const LIVE_BASE = "https://skormdemo.tournayre.ovh/theme-live";
 const ACTIVE_STATE_URL = `${LIVE_BASE}/active.json`;
-const BACKGROUND_URL = `${LIVE_BASE}/background.png`;
 const LOGO_URL = `${LIVE_BASE}/logo.webp`;
 const PALETTE_URL = `${LIVE_BASE}/palette.css`;
 const STYLE_ID = "skorm-theme-sync-live-values";
@@ -106,7 +105,7 @@ module.exports = class SkormThemeSync {
         return palette;
     }
 
-    applyThemeStyle(cacheKey, palette) {
+    applyThemeStyle(cacheKey, palette, backgroundFile) {
         let style = document.getElementById(STYLE_ID);
         if (!style) {
             style = document.createElement("style");
@@ -115,7 +114,7 @@ module.exports = class SkormThemeSync {
             document.head.append(style);
         }
         const declarations = [
-            `--skorm-image: url("${BACKGROUND_URL}?v=${cacheKey}") !important`,
+            `--skorm-image: url("${LIVE_BASE}/${backgroundFile}?v=${cacheKey}") !important`,
             `--skorm-server-icon: url("${LOGO_URL}?v=${cacheKey}") !important`,
             ...RGB_PROPERTIES.map(
                 (property) => `${property}: ${palette[property]} !important`
@@ -131,16 +130,22 @@ module.exports = class SkormThemeSync {
             const state = JSON.parse(await this.fetchText(ACTIVE_STATE_URL));
             const slug = String(state.slug || "").trim().toLowerCase();
             const selectedAt = String(state.selected_at || "").trim();
+            const backgroundFile = String(
+                state.background || "background.png"
+            ).trim().toLowerCase();
             if (!/^[a-z0-9][a-z0-9-]{0,63}$/.test(slug) || !selectedAt) {
                 throw new Error("État de thème Nextcloud invalide");
             }
+            if (!/^background\.(?:png|webp)$/.test(backgroundFile)) {
+                throw new Error("Nom de fond live invalide");
+            }
 
-            const version = `${slug}:${selectedAt}`;
+            const version = `${slug}:${backgroundFile}:${selectedAt}`;
             if (!initial && version === this.lastVersion) return;
 
             const palette = this.parsePalette(await this.fetchText(PALETTE_URL));
             const cacheKey = encodeURIComponent(version);
-            this.applyThemeStyle(cacheKey, palette);
+            this.applyThemeStyle(cacheKey, palette, backgroundFile);
 
             const changed = this.lastVersion && this.lastVersion !== version;
             this.lastVersion = version;
