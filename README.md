@@ -58,8 +58,7 @@ server's real icon for other members.
 
 The bundled `SKORM - Agency` customization uses
 [`assets/skorm-modern-loop-512.webp`](assets/skorm-modern-loop-512.webp) and
-targets the server's accessible label. It therefore works without enabling
-Discord Developer Mode.
+targets that server's exact Discord guild ID.
 
 ## Compatibility
 

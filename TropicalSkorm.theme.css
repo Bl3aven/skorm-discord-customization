@@ -116,16 +116,15 @@ body {
 
 /*
  * Local animated icon for SKORM - Agency.
- * Targeting the accessible server label keeps the rule independent of the
- * Discord server ID and limits the change to this one entry in the guild rail.
+ * The guild ID keeps the rule limited to this exact server rail entry.
  */
-[data-list-item-id^="guildsnav___"][aria-label*="SKORM - Agency"] img {
+[data-list-item-id="guildsnav___1523407172514349097"] img {
     content: url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/assets/skorm-modern-loop-512.webp") !important;
     object-fit: cover !important;
 }
 
-[data-list-item-id^="guildsnav___"][aria-label*="SKORM - Agency"] [class^="childWrapper_"],
-[data-list-item-id^="guildsnav___"][aria-label*="SKORM - Agency"] [class*=" childWrapper_"] {
+[data-list-item-id="guildsnav___1523407172514349097"] [class^="childWrapper_"],
+[data-list-item-id="guildsnav___1523407172514349097"] [class*=" childWrapper_"] {
     color: transparent !important;
     background:
         url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/assets/skorm-modern-loop-512.webp")

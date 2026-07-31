@@ -6,7 +6,7 @@ All notable changes to TropicalSkorm are documented in this file.
 
 - Add the animated modern SKORM icon.
 - Apply it locally to the `SKORM - Agency` entry in the Discord server rail.
-- Target the accessible server label so no Discord developer-mode ID is needed.
+- Target the exact Discord guild ID for reliable matching.
 
 ## 1.2.0 — 2026-07-31
 
