@@ -1,6 +1,19 @@
 # Changelog
 
-All notable changes to TropicalSkorm are documented in this file.
+All notable changes to SKORM Discord Customization are documented in this
+file.
+
+## 2.0.0 — 2026-07-31
+
+- Rename the public project to `skorm-discord-customization`.
+- Generate every BetterDiscord theme as standalone CSS so Chromium no longer
+  rejects `raw.githubusercontent.com` CSS imports served as `text/plain`.
+- Add `SkormDynamic.theme.css` as the general live theme name while preserving
+  `TropicalSkorm.theme.css` for existing installations.
+- Add the auditable `SkormThemeSync` companion plugin.
+- Poll Nextcloud state every three seconds and use versioned asset URLs so
+  every connected client applies the new background, logo and palette without
+  reloading Discord or waiting for GitHub Actions.
 
 ## 1.6.0 — 2026-07-31
 

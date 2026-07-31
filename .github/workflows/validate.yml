@@ -1,0 +1,21 @@
+name: Validate themes and plugin
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Validate generated themes
+        run: python scripts/build_themes.py --check
+
+      - name: Validate BetterDiscord plugin syntax
+        run: node --check SkormThemeSync.plugin.js

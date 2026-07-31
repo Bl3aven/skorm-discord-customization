@@ -1,15 +1,15 @@
-name: Sync background and logo
+name: Mirror active Nextcloud design
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/15 * * * *"
 
 permissions:
   contents: write
 
 concurrency:
-  group: sync-background
+  group: mirror-active-design
   cancel-in-progress: true
 
 jobs:
