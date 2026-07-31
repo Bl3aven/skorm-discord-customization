@@ -1,16 +1,144 @@
 /**
- * @name SKORM Hell
+ * @name SkormHell
  * @author Bleaven
- * @description Obsidian, molten lava and ember SKORM theme with its matching animated server logo.
- * @version 1.5.0
- * @source https://github.com/Bl3aven/tropical-skorm-theme
- * @website https://github.com/Bl3aven/tropical-skorm-theme
+ * @description Obsidian, lava and ember SKORM theme.
+ * @version 2.0.0
+ * @source https://github.com/Bl3aven/skorm-discord-customization/blob/main/SkormHell.theme.css
+ * @website https://github.com/Bl3aven/skorm-discord-customization
  */
 
-@import url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/SkormCore.css");
-@import url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/assets/palettes/hell.css");
+/* Generated as standalone CSS: remote CSS imports are intentionally avoided. */
+:root {
+    --skorm-base-rgb: 13 3 2;
+    --skorm-secondary-rgb: 36 8 3;
+    --skorm-accent-rgb: 255 73 31;
+}
 
 :root {
-    --skorm-image: url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/assets/backgrounds/hell.png");
-    --skorm-server-icon: url("https://raw.githubusercontent.com/Bl3aven/tropical-skorm-theme/main/assets/logos/hell.webp");
+    --skorm-image: url("https://raw.githubusercontent.com/Bl3aven/skorm-discord-customization/main/assets/backgrounds/hell.png");
+    --skorm-server-icon: url("https://raw.githubusercontent.com/Bl3aven/skorm-discord-customization/main/assets/logos/hell.webp");
+}
+
+/*
+ * Shared layout for the SKORM BetterDiscord theme collection.
+ * Theme files only select an artwork, an animated icon and a color palette.
+ */
+
+html,
+body {
+    background-color: rgb(var(--skorm-base-rgb) / 100%) !important;
+    background-image:
+        linear-gradient(
+            rgb(var(--skorm-base-rgb) / 5%),
+            rgb(var(--skorm-base-rgb) / 18%)
+        ),
+        var(--skorm-image) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+}
+
+#app-mount,
+[class^="app_"],
+[class*=" app_"],
+[class^="bg_"],
+[class*=" bg_"],
+[class^="layers_"],
+[class*=" layers_"],
+[class^="layer_"],
+[class*=" layer_"],
+[class^="base_"],
+[class*=" base_"] {
+    background-color: transparent !important;
+}
+
+.theme-dark,
+.theme-darker,
+.theme-amoled {
+    --background-primary: rgb(var(--skorm-base-rgb) / 48%);
+    --background-secondary: rgb(var(--skorm-base-rgb) / 55%);
+    --background-secondary-alt: rgb(var(--skorm-base-rgb) / 66%);
+    --background-tertiary: rgb(var(--skorm-base-rgb) / 62%);
+    --background-floating: rgb(var(--skorm-base-rgb) / 88%);
+    --background-nested-floating: rgb(var(--skorm-secondary-rgb) / 86%);
+    --background-mobile-primary: rgb(var(--skorm-base-rgb) / 48%);
+    --background-mobile-secondary: rgb(var(--skorm-base-rgb) / 62%);
+    --background-base-lowest: rgb(var(--skorm-base-rgb) / 35%);
+    --background-base-lower: rgb(var(--skorm-base-rgb) / 42%);
+    --background-base-low: rgb(var(--skorm-secondary-rgb) / 48%);
+    --background-surface-high: rgb(var(--skorm-secondary-rgb) / 55%);
+    --background-surface-higher: rgb(var(--skorm-secondary-rgb) / 62%);
+    --background-surface-highest: rgb(var(--skorm-secondary-rgb) / 70%);
+    --bg-base-primary: rgb(var(--skorm-base-rgb) / 32%);
+    --bg-base-secondary: rgb(var(--skorm-base-rgb) / 44%);
+    --bg-base-tertiary: rgb(var(--skorm-base-rgb) / 58%);
+    --bg-surface-overlay: rgb(var(--skorm-base-rgb) / 88%);
+    --bg-surface-raised: rgb(var(--skorm-secondary-rgb) / 82%);
+    --home-background: transparent;
+    --chat-background-default: rgb(var(--skorm-base-rgb) / 28%);
+    --input-background: rgb(var(--skorm-base-rgb) / 70%);
+    --channeltextarea-background: rgb(var(--skorm-base-rgb) / 70%);
+    --modal-background: rgb(var(--skorm-base-rgb) / 88%);
+    --modal-footer-background: rgb(var(--skorm-base-rgb) / 92%);
+    --background-modifier-hover: rgb(var(--skorm-accent-rgb) / 8%);
+    --background-modifier-active: rgb(var(--skorm-accent-rgb) / 12%);
+    --background-modifier-selected: rgb(var(--skorm-accent-rgb) / 15%);
+    --background-modifier-accent: rgb(var(--skorm-accent-rgb) / 15%);
+    --border-faint: rgb(var(--skorm-accent-rgb) / 6%);
+    --border-subtle: rgb(var(--skorm-accent-rgb) / 10%);
+    --border-strong: rgb(var(--skorm-accent-rgb) / 15%);
+    --focus-primary: rgb(var(--skorm-accent-rgb));
+}
+
+[class^="sidebar_"],
+[class*=" sidebar_"],
+[class^="members_"],
+[class*=" members_"] {
+    background-color: rgb(var(--skorm-base-rgb) / 55%) !important;
+    backdrop-filter: blur(2px);
+}
+
+[class^="chat_"],
+[class*=" chat_"],
+[class^="chatContent_"],
+[class*=" chatContent_"] {
+    background-color: rgb(var(--skorm-base-rgb) / 22%) !important;
+}
+
+[class^="panels_"],
+[class*=" panels_"],
+[class^="form_"],
+[class*=" form_"] {
+    background-color: rgb(var(--skorm-base-rgb) / 65%) !important;
+    backdrop-filter: blur(3px);
+}
+
+[class^="title_"],
+[class*=" title_"],
+[class^="themed_"],
+[class*=" themed_"] {
+    --background-primary: rgb(var(--skorm-base-rgb) / 60%);
+}
+
+::selection {
+    background: rgb(var(--skorm-accent-rgb) / 28%);
+}
+
+/*
+ * Local animated icon for SKORM - Agency.
+ * The guild ID keeps the rule limited to this exact server rail entry.
+ */
+[data-list-item-id="guildsnav___1523407172514349097"] img {
+    content: var(--skorm-server-icon) !important;
+    object-fit: cover !important;
+}
+
+[data-list-item-id="guildsnav___1523407172514349097"] [class^="childWrapper_"],
+[data-list-item-id="guildsnav___1523407172514349097"] [class*=" childWrapper_"] {
+    color: transparent !important;
+    background:
+        var(--skorm-server-icon)
+        center / cover
+        no-repeat !important;
 }

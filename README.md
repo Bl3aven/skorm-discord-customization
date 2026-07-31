@@ -1,56 +1,75 @@
-# SKORM BetterDiscord Theme Collection
+# SKORM Discord Customization
 
-Five dark, translucent BetterDiscord themes with matching animated SKORM
-server icons, plus one dynamic theme synchronized from Nextcloud.
+Auditable BetterDiscord themes, animated SKORM server icons and a live
+Nextcloud synchronizer. The live edition applies a global theme change to
+every connected client in about three seconds.
 
 | Theme | Visual identity | Download |
 |---|---|---|
-| Cyberpunk | Neon magenta and cyan | [`SkormCyberpunk.theme.css`](https://github.com/Bl3aven/tropical-skorm-theme/releases/latest/download/SkormCyberpunk.theme.css) |
-| Galaxy | Violet deep space | [`SkormGalaxy.theme.css`](https://github.com/Bl3aven/tropical-skorm-theme/releases/latest/download/SkormGalaxy.theme.css) |
-| Greek | Marble and Olympian gold | [`SkormGreek.theme.css`](https://github.com/Bl3aven/tropical-skorm-theme/releases/latest/download/SkormGreek.theme.css) |
-| Hell | Obsidian, lava and embers | [`SkormHell.theme.css`](https://github.com/Bl3aven/tropical-skorm-theme/releases/latest/download/SkormHell.theme.css) |
-| Tropical | Dark emerald jungle | [`SkormTropical.theme.css`](https://github.com/Bl3aven/tropical-skorm-theme/releases/latest/download/SkormTropical.theme.css) |
-| Dynamic | Active Nextcloud design | [`TropicalSkorm.theme.css`](https://github.com/Bl3aven/tropical-skorm-theme/releases/latest/download/TropicalSkorm.theme.css) |
+| Cyberpunk | Neon magenta and cyan | [`SkormCyberpunk.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormCyberpunk.theme.css) |
+| Galaxy | Violet deep space | [`SkormGalaxy.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormGalaxy.theme.css) |
+| Greek | Marble and Olympian gold | [`SkormGreek.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormGreek.theme.css) |
+| Hell | Obsidian, lava and embers | [`SkormHell.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormHell.theme.css) |
+| Tropical | Dark emerald jungle | [`SkormTropical.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormTropical.theme.css) |
+| Live | Active global Nextcloud design | [`SkormDynamic.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormDynamic.theme.css) |
 
 ![Active SKORM background](assets/main.png)
 
-## Installation
+## Live installation
 
-1. Download one `.theme.css` file from the table.
-2. Open Discord and go to **Settings → BetterDiscord → Themes**.
-3. Select **Open Themes Folder**.
-4. Copy the downloaded file into that folder.
-5. Enable only the SKORM theme you want to use.
+The live edition needs two small, readable files:
 
-The BetterDiscord theme folder on Windows is:
+1. Download [`SkormDynamic.theme.css`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormDynamic.theme.css).
+2. Download [`SkormThemeSync.plugin.js`](https://github.com/Bl3aven/skorm-discord-customization/releases/latest/download/SkormThemeSync.plugin.js).
+3. Copy the CSS file to **Settings → BetterDiscord → Themes → Open Themes Folder**.
+4. Copy the plugin to **Settings → BetterDiscord → Plugins → Open Plugins Folder**.
+5. Enable `SkormDynamic` and `SkormThemeSync`.
+
+On Windows, the folders are:
 
 ```text
 %appdata%\BetterDiscord\themes
+%appdata%\BetterDiscord\plugins
 ```
 
-The five named themes are fixed: selecting `SKORM Hell`, for example, always
-loads the Hell background, red palette and matching animated logo.
+`TropicalSkorm.theme.css` remains available as a legacy filename for existing
+installations. It contains the same standalone CSS as `SkormDynamic`.
 
-## Dynamic theme
+## How live synchronization works
 
-`TropicalSkorm.theme.css` is the dynamic edition. It always loads:
+`/theme appliquer` writes the active selection to Nextcloud, then SKORMBOT
+publishes a read-only atomic snapshot at
+`https://skormdemo.tournayre.ovh/theme-live/`. The synchronizer:
 
-```text
-assets/main.png
-assets/server-icon-main.webp
-assets/active-palette.css
+- polls the 129-byte public `themes/active.json` state every three seconds;
+- downloads the palette only when the state version changes;
+- updates CSS variables without reloading Discord;
+- adds that version to the background and logo URLs, bypassing the four-hour
+  Nextcloud image cache.
+
+The GitHub Actions workflow still mirrors the active assets into this
+repository as a backup, but live clients do not wait for GitHub Actions or the
+GitHub raw-content cache.
+
+The plugin performs GET requests only to this public read-only HTTPS endpoint.
+The editable Nextcloud share token is never distributed. The plugin does not
+read Discord messages, credentials or tokens, and it does not send data
+anywhere. Its complete source is
+[`SkormThemeSync.plugin.js`](SkormThemeSync.plugin.js).
+
+## Fixed themes
+
+The five named themes do not require the synchronizer. Each `.theme.css` is
+standalone: the shared layout and palette are embedded at build time to avoid
+Chromium rejecting GitHub raw CSS served as `text/plain; nosniff`.
+
+To rebuild and verify all generated files:
+
+```bash
+python scripts/build_themes.py
+python scripts/build_themes.py --check
+node --check SkormThemeSync.plugin.js
 ```
-
-The repository synchronizes these files from Nextcloud approximately every
-5 minutes. For the five known designs, the workflow compares the SHA-256 of
-`main.png` with
-[`assets/logos/design-map.json`](assets/logos/design-map.json), then selects
-the matching animated logo and color palette automatically.
-
-For an unknown or modified design, place its animated logo at
-`logos/main.webp` and its palette at `palettes/main.css` in Nextcloud.
-SKORMBOT updates these active files through `/theme appliquer`, so future
-catalogue entries do not require a bot code change.
 
 ## Server icon scope
 
@@ -78,5 +97,5 @@ The SKORM artwork is covered by the terms in
 
 ## Disclaimer
 
-SKORM themes are independent community themes. They are not affiliated with
-or endorsed by Discord or BetterDiscord.
+SKORM customization is an independent community project. It is not affiliated
+with or endorsed by Discord or BetterDiscord.

@@ -1,4 +1,6 @@
 *.theme.css.tmp
 assets/*.new
+__pycache__/
+*.pyc
 .DS_Store
 Thumbs.db
