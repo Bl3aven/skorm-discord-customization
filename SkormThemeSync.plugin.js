@@ -1,8 +1,8 @@
 /**
  * @name SkormThemeSync
  * @author Bleaven
- * @description Applies the active SKORM background, animated logo and palette to every connected BetterDiscord client within a few seconds.
- * @version 2.1.0
+ * @description Applies the active SKORM visuals only inside the SKORM guild while keeping its animated server icon visible everywhere.
+ * @version 2.2.0
  * @source https://github.com/Bl3aven/skorm-discord-customization/blob/main/SkormThemeSync.plugin.js
  * @website https://github.com/Bl3aven/skorm-discord-customization
  * @updateUrl https://raw.githubusercontent.com/Bl3aven/skorm-discord-customization/main/SkormThemeSync.plugin.js
@@ -11,7 +11,10 @@
 "use strict";
 
 const PLUGIN_NAME = "SkormThemeSync";
+const SKORM_GUILD_ID = "1523407172514349097";
+const ACTIVE_CLASS = "skorm-active";
 const POLL_INTERVAL_MS = 3000;
+const SCOPE_INTERVAL_MS = 250;
 const REQUEST_TIMEOUT_MS = 10000;
 const LIVE_BASE = "https://skormdemo.tournayre.ovh/theme-live";
 const ACTIVE_STATE_URL = `${LIVE_BASE}/active.json`;
@@ -28,6 +31,7 @@ module.exports = class SkormThemeSync {
     constructor() {
         this.api = new BdApi(PLUGIN_NAME);
         this.timer = null;
+        this.scopeTimer = null;
         this.themeCheckTimer = null;
         this.syncing = false;
         this.lastVersion = "";
@@ -35,6 +39,11 @@ module.exports = class SkormThemeSync {
     }
 
     start() {
+        this.updateScope();
+        this.scopeTimer = setInterval(
+            () => this.updateScope(),
+            SCOPE_INTERVAL_MS
+        );
         if (!this.enableDynamicTheme()) {
             // BetterDiscord can start plugins before it has finished indexing
             // themes. Retry once after startup before showing a warning.
@@ -54,10 +63,25 @@ module.exports = class SkormThemeSync {
 
     stop() {
         if (this.timer) clearInterval(this.timer);
+        if (this.scopeTimer) clearInterval(this.scopeTimer);
         if (this.themeCheckTimer) clearTimeout(this.themeCheckTimer);
         this.timer = null;
+        this.scopeTimer = null;
         this.themeCheckTimer = null;
+        document.documentElement.classList.remove(ACTIVE_CLASS);
         document.getElementById(STYLE_ID)?.remove();
+    }
+
+    isSkormRoute(pathname = window.location.pathname) {
+        const match = /^\/channels\/([^/?#]+)/.exec(pathname);
+        return match?.[1] === SKORM_GUILD_ID;
+    }
+
+    updateScope(pathname = window.location.pathname) {
+        document.documentElement.classList.toggle(
+            ACTIVE_CLASS,
+            this.isSkormRoute(pathname)
+        );
     }
 
     enableDynamicTheme() {

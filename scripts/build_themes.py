@@ -12,7 +12,7 @@ REPOSITORY = "Bl3aven/skorm-discord-customization"
 REPOSITORY_URL = f"https://github.com/{REPOSITORY}"
 RAW_BASE = f"https://raw.githubusercontent.com/{REPOSITORY}/main"
 LIVE_BASE = "https://skormdemo.tournayre.ovh/theme-live"
-VERSION = "2.1.0"
+VERSION = "2.2.0"
 
 FIXED_THEMES = {
     "SkormCyberpunk.theme.css": (

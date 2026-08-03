@@ -1,8 +1,8 @@
 # SKORM Discord Customization
 
 Auditable BetterDiscord themes, animated backgrounds and SKORM server icons with a live
-Nextcloud synchronizer. The live edition applies a global theme change to
-every connected client within a few seconds.
+Nextcloud synchronizer. The live edition applies the active design to every
+connected client within a few seconds, but only while SKORM is open.
 
 | Theme | Visual identity | Download |
 |---|---|---|
@@ -45,12 +45,19 @@ publishes a read-only atomic snapshot at
 - downloads the palette only when the state version changes;
 - selects the animated WebP or static PNG declared by SKORMBOT;
 - updates CSS variables without reloading Discord;
+- activates the background, palette and transparent panels only on the SKORM
+  server (`1523407172514349097`);
+- keeps the matching animated SKORM icon visible in the server rail while
+  browsing direct messages or another server;
 - adds that version to the background and logo URLs, bypassing browser and
   reverse-proxy caches.
 
 The GitHub Actions workflow still mirrors the active assets into this
 repository as a backup, but live clients do not wait for GitHub Actions or the
 GitHub raw-content cache.
+
+Discord navigation is detected locally from the `/channels/<guild-id>/...`
+route. No Discord message, token or account data is inspected.
 
 The plugin performs GET requests only to this public read-only HTTPS endpoint.
 The editable Nextcloud share token is never distributed. The plugin does not

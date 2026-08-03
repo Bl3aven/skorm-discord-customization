@@ -20,6 +20,9 @@ jobs:
       - name: Validate BetterDiscord plugin syntax
         run: node --check SkormThemeSync.plugin.js
 
+      - name: Validate guild route scoping
+        run: node scripts/test_plugin_scope.js
+
       - name: Validate animated backgrounds
         run: |
           for theme in cyberpunk galaxy greek hell tropical; do

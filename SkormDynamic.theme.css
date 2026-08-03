@@ -2,16 +2,16 @@
  * @name SkormDynamic
  * @author Bleaven
  * @description Live SKORM theme synchronized from Nextcloud by SkormThemeSync.
- * @version 2.1.0
+ * @version 2.2.0
  * @source https://github.com/Bl3aven/skorm-discord-customization/blob/main/SkormDynamic.theme.css
  * @website https://github.com/Bl3aven/skorm-discord-customization
  */
 
 /* Generated as standalone CSS: remote CSS imports are intentionally avoided. */
 :root {
-    --skorm-base-rgb: 13 3 2;
-    --skorm-secondary-rgb: 36 8 3;
-    --skorm-accent-rgb: 255 73 31;
+    --skorm-base-rgb: 2 8 6;
+    --skorm-secondary-rgb: 5 18 13;
+    --skorm-accent-rgb: 166 255 151;
 }
 
 :root {
@@ -24,8 +24,8 @@
  * Theme files only select an artwork, an animated icon and a color palette.
  */
 
-html,
-body {
+html.skorm-active,
+html.skorm-active body {
     background-color: rgb(var(--skorm-base-rgb) / 100%) !important;
     background-image:
         linear-gradient(
@@ -39,23 +39,26 @@ body {
     background-attachment: fixed !important;
 }
 
-#app-mount,
-[class^="app_"],
-[class*=" app_"],
-[class^="bg_"],
-[class*=" bg_"],
-[class^="layers_"],
-[class*=" layers_"],
-[class^="layer_"],
-[class*=" layer_"],
-[class^="base_"],
-[class*=" base_"] {
+html.skorm-active #app-mount,
+html.skorm-active [class^="app_"],
+html.skorm-active [class*=" app_"],
+html.skorm-active [class^="bg_"],
+html.skorm-active [class*=" bg_"],
+html.skorm-active [class^="layers_"],
+html.skorm-active [class*=" layers_"],
+html.skorm-active [class^="layer_"],
+html.skorm-active [class*=" layer_"],
+html.skorm-active [class^="base_"],
+html.skorm-active [class*=" base_"] {
     background-color: transparent !important;
 }
 
-.theme-dark,
-.theme-darker,
-.theme-amoled {
+html.skorm-active.theme-dark,
+html.skorm-active.theme-darker,
+html.skorm-active.theme-amoled,
+html.skorm-active .theme-dark,
+html.skorm-active .theme-darker,
+html.skorm-active .theme-amoled {
     --background-primary: rgb(var(--skorm-base-rgb) / 48%);
     --background-secondary: rgb(var(--skorm-base-rgb) / 55%);
     --background-secondary-alt: rgb(var(--skorm-base-rgb) / 66%);
@@ -91,37 +94,37 @@ body {
     --focus-primary: rgb(var(--skorm-accent-rgb));
 }
 
-[class^="sidebar_"],
-[class*=" sidebar_"],
-[class^="members_"],
-[class*=" members_"] {
+html.skorm-active [class^="sidebar_"],
+html.skorm-active [class*=" sidebar_"],
+html.skorm-active [class^="members_"],
+html.skorm-active [class*=" members_"] {
     background-color: rgb(var(--skorm-base-rgb) / 55%) !important;
     backdrop-filter: blur(2px);
 }
 
-[class^="chat_"],
-[class*=" chat_"],
-[class^="chatContent_"],
-[class*=" chatContent_"] {
+html.skorm-active [class^="chat_"],
+html.skorm-active [class*=" chat_"],
+html.skorm-active [class^="chatContent_"],
+html.skorm-active [class*=" chatContent_"] {
     background-color: rgb(var(--skorm-base-rgb) / 22%) !important;
 }
 
-[class^="panels_"],
-[class*=" panels_"],
-[class^="form_"],
-[class*=" form_"] {
+html.skorm-active [class^="panels_"],
+html.skorm-active [class*=" panels_"],
+html.skorm-active [class^="form_"],
+html.skorm-active [class*=" form_"] {
     background-color: rgb(var(--skorm-base-rgb) / 65%) !important;
     backdrop-filter: blur(3px);
 }
 
-[class^="title_"],
-[class*=" title_"],
-[class^="themed_"],
-[class*=" themed_"] {
+html.skorm-active [class^="title_"],
+html.skorm-active [class*=" title_"],
+html.skorm-active [class^="themed_"],
+html.skorm-active [class*=" themed_"] {
     --background-primary: rgb(var(--skorm-base-rgb) / 60%);
 }
 
-::selection {
+html.skorm-active ::selection {
     background: rgb(var(--skorm-accent-rgb) / 28%);
 }
 
