@@ -3,6 +3,14 @@
 All notable changes to SKORM Discord Customization are documented in this
 file.
 
+## 2.2.0 — 2026-08-03
+
+- Scope the animated background, SKORM palette and translucent panels to the
+  SKORM guild route only.
+- Restore Discord's normal appearance in direct messages and other servers.
+- Keep the matching animated SKORM server icon visible throughout Discord.
+- Add route tests for SKORM, another guild and direct messages.
+
 ## 2.1.0 — 2026-07-31
 
 - Add five seamless 1280×720 animated WebP backgrounds at 24 FPS.
