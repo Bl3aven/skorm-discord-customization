@@ -3,7 +3,7 @@ name: Mirror active Nextcloud design
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "0 * * * *"
 
 permissions:
   contents: write
@@ -15,6 +15,7 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
@@ -23,13 +24,16 @@ jobs:
         env:
           NEXTCLOUD_MAIN_URL: ${{ secrets.NEXTCLOUD_MAIN_URL }}
         run: |
+          echo "Checking NextCloud URL availability..."
           test -n "$NEXTCLOUD_MAIN_URL"
-          curl --fail --location --retry 3 \
+          curl --fail --location --retry 3 --retry-delay 5 \
+            --connect-timeout 30 --max-time 120 \
             --output assets/main.png.new \
             "$NEXTCLOUD_MAIN_URL"
           file assets/main.png.new | grep -q "PNG image data"
           test "$(wc -c < assets/main.png.new)" -gt 10000
           mv assets/main.png.new assets/main.png
+          echo "Successfully downloaded main.png"
 
       - name: Select the matching animated logo
         env:
@@ -37,6 +41,7 @@ jobs:
           NEXTCLOUD_PALETTE_MAIN_URL: ${{ secrets.NEXTCLOUD_PALETTE_MAIN_URL }}
         run: |
           source_hash="$(sha256sum assets/main.png | cut -d ' ' -f 1)"
+          echo "Looking up design hash: $source_hash"
           logo_path="$(
             jq -r --arg hash "$source_hash" \
               '.designs[] | select(.sha256 == $hash) | .logo' \
@@ -58,10 +63,12 @@ jobs:
             echo "No known design matches $source_hash; using the Nextcloud active logo and palette."
             test -n "$NEXTCLOUD_LOGO_MAIN_URL"
             test -n "$NEXTCLOUD_PALETTE_MAIN_URL"
-            curl --fail --location --retry 3 \
+            curl --fail --location --retry 3 --retry-delay 5 \
+              --connect-timeout 30 --max-time 120 \
               --output assets/server-icon-main.webp.new \
               "$NEXTCLOUD_LOGO_MAIN_URL"
-            curl --fail --location --retry 3 \
+            curl --fail --location --retry 3 --retry-delay 5 \
+              --connect-timeout 30 --max-time 120 \
               --output assets/active-palette.css.new \
               "$NEXTCLOUD_PALETTE_MAIN_URL"
           fi
@@ -71,6 +78,7 @@ jobs:
           grep -q -- "--skorm-accent-rgb" assets/active-palette.css.new
           mv assets/server-icon-main.webp.new assets/server-icon-main.webp
           mv assets/active-palette.css.new assets/active-palette.css
+          echo "Successfully updated logo and palette"
 
       - name: Commit updated visual assets
         run: |
